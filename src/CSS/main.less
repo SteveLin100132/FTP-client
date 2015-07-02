@@ -1,0 +1,298 @@
+/* Import other less */
+@import 'global-variables.less';
+
+/* LESS Document */
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: '微軟正黑體';
+    -webkit-app-region: drag;
+
+    @app-width: 990px;
+    @app-height: 590px;
+    .app-container {
+        top: 0;
+        left: 0;
+        z-index: 0;
+        width: @app-width;
+        height: @app-height;
+        position: absolute;
+        background-color: rgb(246,246,246);
+        box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+
+        @panel-height: 50px;
+        .top-panel {
+            top: 0;
+            right: 0;
+            z-index: 2;
+            width: @app-width - @navigation-width;
+            height: @panel-height;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0px 1px 2px rgba(0,0,0,0.1);
+
+            .setting {
+                left: 10px;
+                opacity: 0.5;
+                float: left;
+                width: 30px;
+                height: 50px;
+                cursor: pointer;
+                position: relative;
+                background-size: 35px;
+                background-repeat: no-repeat;
+                background-position: 50% 50%;
+                background-image: url(../icons/more-vert.svg);
+                -webkit-app-region: no-drag;
+                .transition-duration(300ms);
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+
+            .ctrl-btn {
+                opacity: 0.5;
+                float: right;
+                width: 30px;
+                height: 50px;
+                cursor: pointer;
+                background-size: 15px;
+                background-repeat: no-repeat;
+                -webkit-app-region: no-drag;
+                .transition-duration(300ms);
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+
+            .minimize-btn {
+                background-position: 50% 50%;
+                background-image: url(../icons/minimize.svg);
+            }
+
+            .close-btn {
+                margin-right: 10px;
+                background-position: 50% 50%;
+                background-image: url(../icons/close.svg);
+            }
+        }
+
+        @navigation-width: 270px;
+        .navigation {
+            top: 0;
+            left: 0;
+            z-index: 2;
+            width: @navigation-width;
+            height: 100%;
+            position: absolute;
+            text-align: center;
+            background-color: @dark;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+
+            .logo {
+                top: 65px;
+                position: relative;
+            }
+
+            .textfield {
+                width: 180px;
+                height: 35px;
+                border: none;
+                outline: none;
+                margin-top: 10px;
+                padding-left: 40px;
+                color: #B0B7C2;
+                background-color: transparent;
+                border-bottom: 1px solid rgb(65,79,98);
+                background-size: 20px;
+                background-repeat: no-repeat;
+                background-position: 10px 50%;
+                -webkit-app-region: no-drag;
+            }
+
+            .textfield-IP {
+                margin-top: 95px;
+                background-image: url(../icons/IP.svg);
+            }
+
+            .textfield-host {
+                background-image: url(../icons/host-name.svg);
+            }
+
+            .textfield-password {
+                background-image: url(../icons/password.svg);
+            }
+
+            .connect-button {
+                width: 220px;
+                height: 50px;
+                margin: 10px auto;
+                margin-top: 35px;
+                position: relative;
+                line-height: 50px;
+                font-size: 18px;
+                letter-spacing: 5px;
+                cursor: pointer;
+                color: rgb(65,79,98);
+                background-color: @green;
+                -webkit-app-region: no-drag;
+
+                &:hover {
+                    color: @green;
+                    background-color: rgba(255,255,255,0.7);
+                }
+
+                &:active {
+                    box-shadow: 0px 1px 2px rgba(0,0,0,0.5) inset;
+                }
+            }
+        }
+
+        .content-container {
+            z-index: 1;
+            top: @panel-height;
+            right: 0;
+            width: @app-width - @navigation-width;
+            height: @app-height - @panel-height;
+            position: absolute;
+
+            .content-list {
+                top: 50%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                position: absolute;
+                background-color: white;
+                -webkit-app-region: no-drag;
+                .transform(translateY(-50%));
+
+                p {
+                    z-index: 3;
+                    width: 80%;
+                    padding-left: 10px;
+                    margin: 0px;
+                    position: fixed;
+                    color: #858585;
+                    font-size: 16px;
+                    line-height: 50px;
+                    text-align: left;
+                    background-color: white;
+                }
+
+                h2 {
+                    z-index: 3;
+                    width: 100%;
+                    margin: 0px;
+                    position: fixed;
+                    color: #858585;
+                    font-size: 20px;
+                    line-height: 50px;
+                    text-align: center;
+                    background-color: white;
+                    border-bottom: 1px solid #DDD;
+                }
+
+                @list-height: 30px;
+                .list-item {
+                    width: 100%;
+                    cursor: pointer;
+                    padding-left: 40px;
+                    height: @list-height;
+                    list-style: none;
+                    color: @dark;
+                    overflow: hidden;
+                    line-height: @list-height;
+                    background-size: 20px;
+                    background-repeat: no-repeat;
+                    background-position: 10px 50%;
+
+                    &:hover {
+                        color: white;
+                        background-color: @green;
+                    }
+
+                    &:focus {
+                        cursor: text;
+                        outline: 1px solid @green;
+                    }
+                }
+            }
+
+            .client-list {
+                z-index: 1;
+                left: 0px;
+                width: 35%;
+                border-right: 1px solid #EEE;
+
+                .list-item {
+                    &:nth-child(2) {
+                        margin-top: 50px;
+                    }
+                }
+            }
+
+            .server-list {
+                z-index: 0;
+                right: 0px;
+                width: 65%;
+
+                p {
+                    width: 443px !important;
+                    font-size: 20px !important;
+                    text-align: left;
+                    padding-left: 25px !important;
+                    border-bottom: 1px solid #DDD;
+                }
+
+                .list-item {
+                    &:nth-child(2) {
+                        margin-top: 50px;
+                    }
+
+                    &:nth-child(even) {
+                        background-color: rgb(246,246,246);
+                    }
+
+                    &:hover {
+                        color: white;
+                        background-color: @green;
+                    }
+                }
+            }
+
+            .tool-list {
+                top: 0;
+                left: 0;
+                z-index: 4;
+                padding: 0;
+                width: 160px;
+                display: none;
+                overflow: hidden;
+                position: absolute;
+                border: 1px solid #DDD;
+                background-color: #F6F6F6;
+                box-shadow: 2px 2px 3px rgba(0,0,0,0.2);
+
+                li {
+                    width: 100%;
+                    height: 40px;
+                    padding-left: 15px;
+                    color: @dark;
+                    line-height: 40px;
+                    list-style: none;
+                    cursor: pointer;
+                    -webkit-app-region: no-drag;
+
+                    &:hover {
+                        background-color: rgba(43,62,84,0.2);
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<link rel='stylesheet/less' type='text/css' href='CSS/main.less' />
+	<link rel='stylesheet/less' type='text/css' href='CSS/jquery.mCustomScrollbar.css' />
+
+	<!-- <script type='text/javascript' src='JS/ftp-server.js'></script> -->
+	<script type='text/javascript' src='JS/framework/less.js'></script>
+	<script type='text/javascript' src='JS/framework/jquery.js'></script>
+	<script type='text/javascript' src='JS/framework/angular.js'></script>
+	<script type='text/javascript' src='JS/definition/main/main.js'></script>
+	<script type='text/javascript' src='JS/definition/main/main-angular.js'></script>
+	<script type='text/javascript' src='JS/API/jquery.mCustomScrollbar.concat.min.js'></script>
+	<title>STEVE-FTP</title>
+</head>
+
+<body ng-app='FTP' ng-controller='controller'>
+	<div class='app-container'>
+		<div class='top-panel'>
+			<div class='setting'></div>
+			<div class='ctrl-btn close-btn'></div>
+			<div class='ctrl-btn minimize-btn'></div>
+		</div>
+		<nav class='navigation'>
+			<img class='logo' src='icons/logo.png' height='180' />
+			<input type='text' class='textfield textfield-IP' value='172.29.7.44' placeholder='Host IP' data-placeholder='Host IP' />
+			<input type='text' class='textfield textfield-host' value='dllab' placeholder='Host Name' data-placeholder='Host Name' />
+			<input type='password' class='textfield textfield-password' value='1315' placeholder='Password' data-placeholder='Password' />
+			<div class='connect-button'>CONNECT</div>
+		</nav>
+		<div class='content-container'>
+			<ul class='content-list client-list'>
+				<p>Client Directory</p>
+				<li class='list-item' ng-repeat='item in client' set-client-icon>
+					{{ item.name }}
+				</li>
+			</ul>
+			<ul class='content-list server-list'>
+				<p>Server Directory</p>
+				<li class='list-item' ng-repeat='item in server' set-server-icon>
+					{{ item.name }}
+				</li>
+			</ul>
+			<ul class='tool-list'>
+				<li class='rename'>Rename</li>
+				<li class='remove'>Remove</li>
+				<li class='download'>Download</li>
+			</ul>
+		</div>
+	</div>
+
+	<script type='text/javascript'>
+		app.init();
+		app.clientRoot();
+		app.dragover('.server-list');
+		app.droppable('.server-list');
+		app.connectFTP({
+			IP: '.textfield-IP',
+			host: '.textfield-host',
+			password: '.textfield-password',
+			connect: '.connect-button'
+		});
+		app.hideToolList('*');
+		app.renameFile('.rename');
+		app.removeFile('.remove');
+		app.downloadFile('.download');
+		app.showDevTools('.setting');
+		app.minimize('.minimize-btn');
+		app.close('.close-btn');
+	</script>
+</body>
+</html>
